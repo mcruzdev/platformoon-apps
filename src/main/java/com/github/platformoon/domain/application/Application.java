@@ -1,16 +1,28 @@
 package com.github.platformoon.domain.application;
 
 import com.google.common.base.MoreObjects;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
+@Entity
+@NamedQuery(name = "Applications.findAll", query = "SELECT app FROM Application app ORDER BY app.name")
+@Table(name = "applications")
 public class Application {
 
-  String id;
+  @Id String id;
   String name;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "language", length = 100)
   Language language;
+
+  @Enumerated(EnumType.STRING)
   Kind kind;
+
   String description;
+
+  protected Application() {}
 
   private Application(final String name, final String description, Language language, Kind kind) {
     this.id = UUID.randomUUID().toString();

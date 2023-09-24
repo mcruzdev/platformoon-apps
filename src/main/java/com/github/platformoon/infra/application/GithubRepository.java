@@ -23,7 +23,7 @@ public class GithubRepository implements GitRepository {
 
     try {
       var builder = this.github.getOrganization(organization);
-      var repository = builder.createRepository(name);
+      var repository = builder.createRepository(name).private_(true);
       return Optional.of(repository.create().getFullName());
     } catch (IOException e) {
       LOGGER.error("error creating a repository using Github API", e);

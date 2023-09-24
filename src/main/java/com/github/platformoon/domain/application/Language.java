@@ -1,5 +1,6 @@
 package com.github.platformoon.domain.application;
 
 public enum Language {
-  GO
+  GO,
+  JAVA
 }
