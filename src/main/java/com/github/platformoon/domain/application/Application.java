@@ -10,60 +10,62 @@ import java.util.UUID;
 @Table(name = "applications")
 public class Application {
 
-  @Id String id;
-  String name;
+    @Id
+    String id;
+    String name;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "language", length = 100)
-  Language language;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", length = 100)
+    Language language;
 
-  @Enumerated(EnumType.STRING)
-  Kind kind;
+    @Enumerated(EnumType.STRING)
+    Kind kind;
 
-  String description;
+    String description;
 
-  protected Application() {}
+    protected Application() {
+    }
 
-  private Application(final String name, final String description, Language language, Kind kind) {
-    this.id = UUID.randomUUID().toString();
-    this.name = name;
-    this.description = description;
-    this.language = language;
-    this.kind = kind;
-  }
+    private Application(final String name, final String description, Language language, Kind kind) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.description = description;
+        this.language = language;
+        this.kind = kind;
+    }
 
-  public static Application create(
-      final String name, final String description, Language language, Kind kind) {
-    return new Application(name, description, language, kind);
-  }
+    public static Application create(
+            final String name, final String description, Language language, Kind kind) {
+        return new Application(name, description, language, kind);
+    }
 
-  public String getId() {
-    return id;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public Language getLanguage() {
-    return language;
-  }
+    public Language getLanguage() {
+        return language;
+    }
 
-  public Kind getKind() {
-    return kind;
-  }
+    public Kind getKind() {
+        return kind;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("id", this.id)
-        .add("name", this.name)
-        .add("description", this.description)
-        .add("kind", this.kind)
-        .add("language", this.language)
-        .toString();
-  }
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", this.id)
+                .add("name", this.name)
+                .add("description", this.description)
+                .add("kind", this.kind)
+                .add("language", this.language)
+                .toString();
+    }
 }

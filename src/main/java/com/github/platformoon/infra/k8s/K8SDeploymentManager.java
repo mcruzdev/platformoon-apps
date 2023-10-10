@@ -1,6 +1,6 @@
 package com.github.platformoon.infra.k8s;
 
-import com.github.platformoon.domain.application.deployments.DeploymentManager;
+import com.github.platformoon.domain.application.deployment.DeploymentManager;
 import com.github.platformoon.domain.application.deployments.Version;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
 import io.fabric8.kubernetes.api.model.apps.DeploymentBuilder;

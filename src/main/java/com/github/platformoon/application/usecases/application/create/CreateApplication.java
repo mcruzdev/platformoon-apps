@@ -1,4 +1,4 @@
-package com.github.platformoon.application.usecases.create;
+package com.github.platformoon.application.usecases.application.create;
 
 import com.github.platformoon.domain.application.Application;
 import com.github.platformoon.domain.application.GitRepository;

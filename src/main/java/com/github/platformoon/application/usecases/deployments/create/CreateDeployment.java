@@ -1,7 +1,7 @@
 package com.github.platformoon.application.usecases.deployments.create;
 
 import com.github.platformoon.domain.application.Application;
-import com.github.platformoon.domain.application.deployments.DeploymentManager;
+import com.github.platformoon.domain.application.deployment.DeploymentManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;

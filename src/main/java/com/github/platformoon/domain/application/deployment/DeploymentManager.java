@@ -1,4 +1,4 @@
-package com.github.platformoon.domain.application.deployments;
+package com.github.platformoon.domain.application.deployment;
 
 public interface DeploymentManager {
 
