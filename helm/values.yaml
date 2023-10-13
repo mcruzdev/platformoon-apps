@@ -4,3 +4,13 @@ app:
   port: 8080
   image:
     name:
+  secrets:
+    ghToken:
+  configs:
+    ghOrg:
+    registryAccount:
+mysql:
+  enabled: true
+  auth:
+    username: platformoon-user
+    database: database

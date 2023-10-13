@@ -16,11 +16,18 @@ spec:
         image: {{ .Values.app.image.name }}
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: "2Gi"
+            cpu: "1000m"
         env:
-          - name: QUARKUS_PROFILE
-            value: k8s
+          - name: QUARKUS_DATASOURCE_JDBC_URL
+            value: "jdbc:mysql://{{ .Release.Name }}-mysql.{{ .Release.Namespace }}.svc.cluster.local:3306/database"
+          - name: QUARKUS_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-mysql"
+                key: mysql-password
+          - name: QUARKUS_DATASOURCE_USERNAME
+            value: {{ .Values.mysql.auth.username }}
         envFrom:
           - secretRef:
               name: {{ .Values.app.name }}
