@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class GithubRepository implements GitRepository {
 
     private static final String DEFAULT_BRANCH = "main";
+    private static final List<String> DEFAULT_REQUIRED_STATUS_CHECKS = List.of();
     private final GitHub github;
     private static final Logger LOGGER = LoggerFactory.getLogger(GithubRepository.class);
     private final String organization;
@@ -43,33 +44,18 @@ public class GithubRepository implements GitRepository {
     }
 
     private static void createBranchProtectionRule(GHRepository newRepo) throws IOException {
-        newRepo
-                .getBranch(DEFAULT_BRANCH)
-                .enableProtection()
-                .requiredReviewers(1)
-                .enable();
+        newRepo.getBranch(DEFAULT_BRANCH).enableProtection().requireBranchIsUpToDate().addRequiredChecks(DEFAULT_REQUIRED_STATUS_CHECKS).requiredReviewers(1).enable();
     }
 
     private static void createPlatformoonYmlFile(String name, GHRepository repoCreated) throws IOException {
-        repoCreated.createContent()
-                .branch(DEFAULT_BRANCH)
-                .path(".platformoon.yml")
-                .message("chore: add .platformoon.yml file")
-                .content(String.format("app: %s", name))
-                .commit();
+        repoCreated.createContent().branch(DEFAULT_BRANCH).path(".platformoon.yml").message("chore: add .platformoon.yml file").content(String.format("app: %s", name)).commit();
     }
 
     @Override
     public List<String> findVersions(String applicationId) {
 
         try {
-            return this.github.getOrganization(organization)
-                    .getRepository(applicationId)
-                    .listTags()
-                    .toList()
-                    .stream()
-                    .map(tag -> tag.getName())
-                    .collect(Collectors.toList());
+            return this.github.getOrganization(organization).getRepository(applicationId).listTags().toList().stream().map(tag -> tag.getName()).collect(Collectors.toList());
         } catch (IOException e) {
             LOGGER.error("error listing repository tags", e);
             throw new RuntimeException(e);
